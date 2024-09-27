@@ -47,6 +47,10 @@ find_common_elements<- function(list1, df){
   return (new_df)
 
 
+#Function to read the data from OpenPedCan and extract only SE 
+read_only_SE <- function(file){
+
+}
 
 #Return a pivoted df after selecting a few columsn
 return_pivot <- function(df){
