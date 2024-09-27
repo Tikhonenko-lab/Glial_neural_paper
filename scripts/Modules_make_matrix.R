@@ -48,7 +48,43 @@ find_common_elements<- function(list1, df){
 
 
 #Function to read the data from OpenPedCan and extract only SE 
+#Extract only RNA-Seq samples and non-NA cancer types
 read_only_SE <- function(file){
+    #PLEASE MAKE SURE THAT THIS IS SE
+      SE<- fread("../data/splice-events-rmats.tsv")
+      #make a new df with a reduced number of columns
+      cols<- c("splicing_case", "geneSymbol", "sample_id", "chr", "strand", "exonStart_0base", "exonEnd"  , "upstreamES",
+         "upstreamEE",  "downstreamES", "downstreamEE", "IJC_SAMPLE_1", "SJC_SAMPLE_1","IncLevel1")
+
+      SE_trunc<- SE %>% select(all_of(cols))
+
+      #Take histology data in
+      hist <- fread("../histologies.tsv")
+      SE_trunc <- SE_trunc %>% filter(splicing_case == "SE")
+      #dim(SE_trunc)
+      #195516372        14
+
+      hist<- hist %>% filter(experimental_strategy =="RNA-Seq")
+      #hist<- hist %>% filter(cancer_group !="NA")
+
+      # dim(hist)
+      #[1] 31918    58
+      SE_trunc_hist<- left_join(SE_trunc, hist, by= "Kids_First_Biospecimen_ID" )
+      #dim(SE_trunc_hist)
+      #[1] 195516372        71
+   
+
+      SE_trunc_final <- SE_trunc_hist %>% select(all_of(cols), cancer_group)
+      #Then check for NAs
+      any(is.na(SE_trunc_final))
+
+      #Some cancer_groups have "NA" in their histology
+      #Make sure to remove these lines
+      SE_trunc_final<- SE_trunc_final %>% filter(! if_any(c("cancer_group"), is.na))
+      saveRDS(SE_trunc_final, file="SE_noNA_data.RData")
+
+      return (SE_trunc_final)
+
 
 }
 
