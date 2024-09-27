@@ -3,7 +3,7 @@
 To download OpenPedCan data run:
   
 
-                 bash data/download.sh
+                bash data/get_data.sh
 
 This should download all the OpenPedcan data for you.
 
