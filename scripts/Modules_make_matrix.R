@@ -54,7 +54,7 @@ find_common_elements<- function(list1, df){
 #Extract only RNA-Seq samples and non-NA cancer types
 read_only_SE <- function(file){
     #PLEASE MAKE SURE THAT THIS IS SE
-      SE<- fread("../data/splice-events-rmats.tsv")
+      SE<- fread("../data/OpenPedCan-analysis/data/v13/splice-events-rmats.tsv")
       #make a new df with a reduced number of columns
       cols<- c("splicing_case", "geneSymbol", "sample_id", "chr", "strand", "exonStart_0base", "exonEnd"  , "upstreamES",
          "upstreamEE",  "downstreamES", "downstreamEE", "IJC_SAMPLE_1", "SJC_SAMPLE_1","IncLevel1")
@@ -62,7 +62,7 @@ read_only_SE <- function(file){
       SE_trunc<- SE %>% select(all_of(cols))
 
       #Take histology data in
-      hist <- fread("../histologies.tsv")
+      hist <- fread("../data/OpenPedCan-analysis/data/v13/histologies.tsv")
       SE_trunc <- SE_trunc %>% filter(splicing_case == "SE")
       #dim(SE_trunc)
       #195516372        14
