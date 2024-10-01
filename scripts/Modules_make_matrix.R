@@ -38,7 +38,7 @@ find_common_microexons <- function(list1){
 
 #Function to return exon1 and number of the tries == 1
 return_filtered_df <-function (df){
-  micro <-  df %>% filter(Size_micro <=30) %>% filter(Num_times_microexon == 1 ) %>% filter(Size_micro %% 3 == 0)
+  micro <-  df %>% filter(Size_micro <= 51) %>% filter(Num_times_microexon == 1 ) %>% filter(Size_micro %% 3 == 0)
   return (micro)
 
 }
