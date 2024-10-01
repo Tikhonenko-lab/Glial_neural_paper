@@ -10,7 +10,6 @@ library(purrr)
 library(ggrepel)
 
 
-#Find 20% of the samples containing microexons
 #Input : Dataframe for NBL/HGG/DMG etc.
 find_percent_samples_after_filter <- function(df){
   uniq<- as.numeric(length(unique(df$Kids_First_Biospecimen_ID)))
