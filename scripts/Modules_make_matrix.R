@@ -91,7 +91,7 @@ return_pivot <- function(df){
 }
 
 #Make for each cancer type
-#Specityfy cancer_type ==  NBL/HGG/LGG etc
+#Specify cancer_type ==  NBL/HGG/LGG etc
 make_cancer_matrix <- function(SE_matrix, cancer_type){
          cancer_matrix <- SE_matrix %>% filter(cancer_group= cancer_type)
 
@@ -104,8 +104,6 @@ make_cancer_matrix <- function(SE_matrix, cancer_type){
 	 #Filter by microexon size and fdivisible by 3
 	 cancer_matrix  = return_filtered_df(cancer_matrix)
 	 return (cancer_matrix)
-
-
 }
 
 
