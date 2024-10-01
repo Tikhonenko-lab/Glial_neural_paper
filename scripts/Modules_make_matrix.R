@@ -90,3 +90,23 @@ return_pivot <- function(df){
   return(j1)
 }
 
+#Make for each cancer type
+#Specityfy cancer_type ==  NBL/HGG/LGG etc
+make_cancer_matrix <- function(SE_matrix, cancer_type){
+         cancer_matrix <- SE_matrix %>% filter(cancer_group= cancer_type)
+
+         cancer_matrix <- cancer_matrix %>% mutate(Microexon_full =paste(geneSymbol,chr,strand,exonStart_0base,exonEnd,upstreamES, upstreamEE,downstreamES, downstreamEE, sep="_"))
+         
+	 cancer_matrix <- cancer_matrix %>% mutate(Microexon_part =paste(geneSymbol,chr,strand,exonStart_0base,exonEnd, sep="_"))
+         
+	 #Microexon size
+	 cancer_matrix  = add_size_microexon(cancer_matrix)
+	 #Filter by microexon size and fdivisible by 3
+	 cancer_matrix  = return_filtered_df(cancer_matrix)
+	 return (cancer_matrix)
+
+
+}
+
+
+
