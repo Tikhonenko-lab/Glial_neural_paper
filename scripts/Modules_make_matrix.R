@@ -92,7 +92,7 @@ return_pivot <- function(df){
 #Make for each cancer type
 #Specify cancer_type ==  NBL/HGG/LGG etc
 make_cancer_matrix <- function(SE_matrix, cancer_type){
-         cancer_matrix <- SE_matrix %>% filter(cancer_group= cancer_type)
+         cancer_matrix <- SE_matrix %>% filter(cancer_group== cancer_type)
 
          cancer_matrix <- cancer_matrix %>% mutate(Microexon_full =paste(geneSymbol,chr,strand,exonStart_0base,exonEnd,upstreamES, upstreamEE,downstreamES, downstreamEE, sep="_"))
          
